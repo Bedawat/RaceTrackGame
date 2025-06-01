@@ -3,6 +3,8 @@ project(RaceTrackGame)
 
 set(CMAKE_CXX_STANDARD 20)
 
+find_package(raylib REQUIRED)
+
 add_executable(RaceTrackGame main.cpp
         Settings.h
         GameEngine.cpp
@@ -13,3 +15,6 @@ add_executable(RaceTrackGame main.cpp
         Player.h
         Track.cpp
         Track.h)
+
+target_link_libraries(RaceTrackGame raylib)
+

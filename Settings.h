@@ -3,12 +3,22 @@
 //
 
 #pragma once
+#include <algorithm>
 
 
+struct Settings {
 
-class Settings {
-public:
+    // Grid dimensions
+    const int gridWidth = 42;
+    const int gridHeight = 30;
 
-private:
+
+    const int windowWidth = gridWidth * 25;
+    const int windowHeight = gridHeight * 25;
+
+    const int cellSize = std::min(windowWidth / gridWidth, windowHeight / gridHeight);
+
+    int playerCount = 1;
+    int TrackNumber = 1;
 
 };

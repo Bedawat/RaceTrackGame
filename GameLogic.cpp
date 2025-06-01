@@ -3,3 +3,20 @@
 //
 
 #include "GameLogic.h"
+
+GameLogic::GameLogic(): state(MENU)
+{
+}
+
+GameLogic::~GameLogic()
+{
+}
+
+GameState& GameLogic::getState()
+{
+    return state;
+}
+
+void GameLogic::update()
+{
+}
