@@ -7,6 +7,7 @@
 
 #include "Player.h"
 #include "Settings.h"
+#include "Track.h"
 
 
 class GameLogic {
@@ -14,11 +15,16 @@ public:
     explicit GameLogic(const Settings& settings);
     ~GameLogic();
 
-    GameState& getState();
+    [[nodiscard]] GameState getGameState() const;
+    void setGameState(GameState state);
+    void init();
     void update();
 
 private:
+    GameState m_state;
     Settings m_settings;
     std::vector<Player> m_players;
+    Track m_track;
+    int m_currentPlayer = 1;
 
 };

@@ -15,17 +15,17 @@ typedef enum Tile
 
 class Track {
 public:
-    Track(const Settings& settings);
+    explicit Track(const Settings& settings);
     ~Track();
 
     void draw();
+    void init();
 
     bool checkCollision(int x, int y);
 
 private:
     Settings m_settings;
     int** m_grid;
-    int m_trackNr;
     int m_startX, m_startY;
     int m_finishX, m_finishY;
 

@@ -8,7 +8,7 @@
 
 GameEngine::GameEngine() : game(m_settings)
 {
-    InitWindow(Settings::windowWidth, Settings::windowHeight, "Racetrack Game");
+    InitWindow(m_settings.windowWidth, m_settings.windowHeight, "Racetrack Game");
     SetTargetFPS(60);
 }
 
@@ -33,24 +33,24 @@ void GameEngine::update()
 
 void GameEngine::draw()
 {
-    switch (game.getState())
+    switch (game.getGameState())
     {
-    case GameState::START_MENU:
+    case START_MENU:
         {
             drawStartMenu();
             break;
         }
-    case GameState::GAME_MENU:
+    case GAME_MENU:
         {
             drawGameMenu();
             break;
         }
-    case GameState::PLAYING:
+    case PLAYING:
         {
             drawGame();
             break;
         }
-    case GameState::GAME_OVER:
+    case GAME_OVER:
         {
             drawGameOver();
             break;
@@ -98,9 +98,11 @@ void GameEngine::drawStartMenu()
     }
 
     EndDrawing();
+    // Wenn Enter gedrückt wurde, zu PLAYING wechseln und Player, Track initialisieren
     if (IsKeyPressed(KEY_ENTER))
     {
-        game.getState() = GameState::PLAYING;
+        game.setGameState(PLAYING);
+        game.init();
     }
 }
 

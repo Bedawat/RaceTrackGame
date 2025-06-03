@@ -4,15 +4,18 @@
 
 #pragma once
 #include <raylib.h>
+#include <vector>
 
 
 class Player {
 public:
+    Player();
     explicit Player(Vector2 position);
     ~Player();
 
 private:
     Vector2 m_position;
-    // TODO: Array, Vector, Liste für bereits gefahrene Strecke
+    Vector2 m_velocity;
+    std::vector<Vector2> m_positions;
 
 };

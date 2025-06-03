@@ -3,6 +3,11 @@
 //
 
 #include "Player.h"
+
+Player::Player()
+{
+}
+
 // TODO: add player functionality
 Player::Player(Vector2 position) : m_position(position)
 {
