@@ -3,22 +3,22 @@
 //
 
 #pragma once
-typedef enum GameState {
-    MENU,
-    PLAYING,
-    GAME_OVER
-} GameState;
+#include <vector>
+
+#include "Player.h"
+#include "Settings.h"
 
 
 class GameLogic {
 public:
-    GameLogic();
+    explicit GameLogic(const Settings& settings);
     ~GameLogic();
 
     GameState& getState();
     void update();
 
 private:
-    GameState state;
+    Settings m_settings;
+    std::vector<Player> m_players;
 
 };

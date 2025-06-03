@@ -16,12 +16,13 @@ public:
 
 
 private:
-    Settings settings;
+    Settings m_settings;
     GameLogic game;
 
     void update();
     void draw();
-    void drawMenu();
+    void drawStartMenu();
+    void drawGameMenu();
     void drawGame();
     void drawGameOver();
 

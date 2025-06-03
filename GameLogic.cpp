@@ -4,7 +4,7 @@
 
 #include "GameLogic.h"
 
-GameLogic::GameLogic(): state(MENU)
+GameLogic::GameLogic(const Settings& settings)
 {
 }
 
