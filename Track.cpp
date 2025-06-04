@@ -68,10 +68,10 @@ void Track::init() const
                 m_grid[x][0] = WALL;
                 m_grid[x][m_settings.gridHeight - 1] = WALL;
             }
-            for (int y = 0; y < m_settings.gridWidth; y++)
+            for (int y = 0; y < m_settings.gridHeight; y++)
             {
                 m_grid[0][y] = WALL;
-                m_grid[m_settings.gridHeight - 1][y] = WALL;
+                m_grid[m_settings.gridWidth - 1][y] = WALL;
             }
             // Gras in der Mitte
             for (int x = 6; x < m_settings.gridWidth - 6; x++)
