@@ -25,15 +25,43 @@ void GameLogic::setGameState(GameState state)
 
 void GameLogic::init()
 {
-    for (int i = 1; i <= m_settings.playerCount; i++)
+    switch (m_settings.playerCount)
     {
-        m_players.emplace_back();
+    case 1:
+        {
+            m_players.emplace_back(BLACK);
+            break;
+        }
+    case 2:
+        {
+            m_players.emplace_back(BLACK);
+            m_players.emplace_back(DARKBLUE);
+            break;
+        }
+    case 3:
+        {
+            m_players.emplace_back(BLACK);
+            m_players.emplace_back(DARKBLUE);
+            m_players.emplace_back(LIME);
+            break;
+        }
+    case 4:
+        {
+            m_players.emplace_back(BLACK);
+            m_players.emplace_back(DARKBLUE);
+            m_players.emplace_back(LIME);
+            m_players.emplace_back(ORANGE);
+            break;
+        }
+    default: break;
     }
+
     m_track.init();
 }
 
 void GameLogic::update()
 {
+
 }
 
 void GameLogic::draw()

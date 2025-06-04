@@ -9,13 +9,23 @@ Player::Player() : m_position(3, 8), m_color(BLACK)
 }
 
 // TODO: add player functionality
-Player::Player(Vector2 position, Color color) : m_position(position), m_color(color)
+Player::Player(Color color) : m_color(color), m_position(Vector2(0,0))
 {
-    m_path.push_back(position);
 }
 
 Player::~Player()
 = default;
+
+Vector2 Player::getPosition() const
+{
+    return m_position;
+}
+
+void Player::setPosition(Vector2 position)
+{
+    m_position = position;
+    m_path.push_back(position);
+}
 
 void Player::move(Vector2 direction)
 {

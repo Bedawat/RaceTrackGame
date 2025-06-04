@@ -12,14 +12,17 @@
 class Player {
 public:
     Player();
-    explicit Player(Vector2 position, Color color);
+    explicit Player(Color color);
     ~Player();
+
+    Vector2 getPosition() const;
+    void setPosition(Vector2 position);
 
     void move(Vector2 direction);
     void draw();
 
 private:
-    Vector2 m_position;
+    Vector2 m_position{};
     Vector2 m_velocity = Vector2(0,0);
     Color m_color;
     Settings m_settings;
