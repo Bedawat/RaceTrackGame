@@ -39,4 +39,9 @@ void GameLogic::update()
 void GameLogic::draw()
 {
     m_track.draw();
+
+    for (Player player : m_players)
+    {
+        player.draw();
+    }
 }

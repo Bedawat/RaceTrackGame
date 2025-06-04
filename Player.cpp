@@ -4,7 +4,7 @@
 
 #include "Player.h"
 
-Player::Player()
+Player::Player() : m_position(3, 8), m_color(BLACK)
 {
 }
 
@@ -15,8 +15,7 @@ Player::Player(Vector2 position, Color color) : m_position(position), m_color(co
 }
 
 Player::~Player()
-{
-}
+= default;
 
 void Player::move(Vector2 direction)
 {
@@ -31,8 +30,12 @@ void Player::move(Vector2 direction)
 
 void Player::draw()
 {
-    DrawCircle( this->m_position.x * m_settings.cellSize + m_settings.cellSize / 2,
+    // Draw the player as a circle at its position
+    // Center the circle on the grid cell
+    // bei der Rechnung: - cellSize / 2,
+    // damit der Kreis in der Mitte des Feldes ist (Position x = 1 ist bei Array x = 0)
+    DrawCircle( m_position.x * m_settings.cellSize - m_settings.cellSize / 2,
             m_settings.cellSize / 2,
-            this->m_position.y * m_settings.cellSize + m_settings.cellSize / 2,
-            this->m_color);
+            m_position.y * m_settings.cellSize - m_settings.cellSize / 2,
+            m_color);
 }
