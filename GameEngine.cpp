@@ -28,7 +28,33 @@ void GameEngine::run()
 
 void GameEngine::update()
 {
-    game.update();
+    switch (game.getGameState())
+    {
+    case START_MENU:
+        {
+            // Wenn Enter gedrückt wurde, zu PLAYING wechseln und Player, Track initialisieren
+            if (IsKeyPressed(KEY_ENTER))
+            {
+                game.setGameState(PLAYING);
+                game.init();
+            }
+            break;
+        }
+    case GAME_MENU:
+        {
+            break;
+        }
+    case PLAYING:
+        {
+            game.update();
+            break;
+        }
+    case GAME_OVER:
+        {
+
+        }
+    }
+
 }
 
 void GameEngine::draw()
@@ -98,12 +124,7 @@ void GameEngine::drawStartMenu()
     }
 
     EndDrawing();
-    // Wenn Enter gedrückt wurde, zu PLAYING wechseln und Player, Track initialisieren
-    if (IsKeyPressed(KEY_ENTER))
-    {
-        game.setGameState(PLAYING);
-        game.init();
-    }
+
 }
 
 void GameEngine::drawGameMenu()

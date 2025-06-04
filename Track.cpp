@@ -4,7 +4,6 @@
 
 #include "Track.h"
 
-#include <raylib.h>
 // TODO: add track functionality
 // TODO: add tracks
 Track::Track(const Settings& settings)
@@ -57,7 +56,7 @@ void Track::draw()
     }
 }
 
-void Track::init()
+void Track::init() const
 {
     switch (m_settings.TrackNumber)
     {

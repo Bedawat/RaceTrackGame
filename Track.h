@@ -4,6 +4,7 @@
 
 #pragma once
 #include "Settings.h"
+#include <raylib.h>
 
 typedef enum Tile
 {
@@ -19,7 +20,7 @@ public:
     ~Track();
 
     void draw();
-    void init();
+    void init() const;
 
     bool checkCollision(int x, int y);
 
