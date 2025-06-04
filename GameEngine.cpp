@@ -119,6 +119,10 @@ void GameEngine::drawGameMenu()
 void GameEngine::drawGame()
 {
     // TODO: implement Game window
+    BeginDrawing();
+    ClearBackground(RAYWHITE);
+    game.draw();
+    EndDrawing();
 }
 
 void GameEngine::drawGameOver()

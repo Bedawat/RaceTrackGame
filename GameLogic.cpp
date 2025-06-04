@@ -29,8 +29,14 @@ void GameLogic::init()
     {
         m_players.emplace_back();
     }
+    m_track.init();
 }
 
 void GameLogic::update()
 {
+}
+
+void GameLogic::draw()
+{
+    m_track.draw();
 }

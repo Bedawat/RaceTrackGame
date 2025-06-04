@@ -19,6 +19,7 @@ public:
     void setGameState(GameState state);
     void init();
     void update();
+    void draw();
 
 private:
     GameState m_state;
