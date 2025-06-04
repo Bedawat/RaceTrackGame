@@ -45,7 +45,7 @@ void Track::draw()
             switch (m_grid[x][y])
             {
             case STREET: color = LIGHTGRAY; break;
-            case GRASS: color = GREEN; break;
+            case GRASS: color = DARKGREEN; break;
             case WALL: color = DARKGRAY; break;
             default: color = LIGHTGRAY; break;
             }
