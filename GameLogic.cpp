@@ -69,8 +69,9 @@ void GameLogic::draw()
     {
         player.draw();
     }
-    DrawCircle((m_players[m_currentPlayer].getPosition().x + m_direction.x) * m_settings.cellSize - m_settings.cellSize / 2,
-               (m_players[m_currentPlayer].getPosition().y + m_direction.y) * m_settings.cellSize - m_settings.cellSize / 2,
+    // Draw the direction Vector where the current player is moving
+    DrawCircle((m_players[m_currentPlayer].getPosition().x + m_players[m_currentPlayer].getVelocity().x + m_direction.x) * m_settings.cellSize - m_settings.cellSize / 2,
+               (m_players[m_currentPlayer].getPosition().y + m_players[m_currentPlayer].getVelocity().y + m_direction.y) * m_settings.cellSize - m_settings.cellSize / 2,
                m_settings.cellSize / 4, YELLOW); // Highlight current player
 
 }

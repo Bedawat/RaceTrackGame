@@ -44,14 +44,38 @@ void Track::draw()
 
             switch (m_grid[x][y])
             {
-            case STREET: color = LIGHTGRAY; break;
-            case GRASS: color = DARKGREEN; break;
-            case WALL: color = DARKGRAY; break;
-            default: color = LIGHTGRAY; break;
+            case STREET: color = LIGHTGRAY;
+                break;
+            case GRASS: color = DARKGREEN;
+                break;
+            case WALL: color = GRAY;
+                break;
+            case START:
+                if (x % 2 == 1)
+                {
+                    color = WHITE;
+                } else
+                {
+                    color = BLACK;
+                }
+                break;
+            case FINISH:
+                if (x % 2 == 0)
+                {
+                    color = WHITE;
+                }else
+                {
+                    color = BLACK;
+                }
+                break;
+            default: color = LIGHTGRAY;
+                break;
             }
 
-            DrawRectangle(x * m_settings.cellSize, y * m_settings.cellSize, m_settings.cellSize, m_settings.cellSize, color);
-            DrawRectangleLines(x * m_settings.cellSize, y * m_settings.cellSize, m_settings.cellSize, m_settings.cellSize, BLACK); // Raster wie auf Papier
+            DrawRectangle(x * m_settings.cellSize, y * m_settings.cellSize, m_settings.cellSize, m_settings.cellSize,
+                          color);
+            DrawRectangleLines(x * m_settings.cellSize, y * m_settings.cellSize, m_settings.cellSize,
+                               m_settings.cellSize, DARKGRAY); // Raster wie auf Papier
         }
     }
 }
@@ -80,6 +104,12 @@ void Track::init() const
                 {
                     m_grid[x][y] = GRASS;
                 }
+            }
+            // Start- und Ziellinie
+            for (int x = 1; x < 6; x++)
+            {
+                m_grid[x][7] = START;
+                m_grid[x][8] = FINISH;
             }
             break;
         }

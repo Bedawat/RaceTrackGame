@@ -10,7 +10,9 @@ typedef enum Tile
 {
     STREET,
     WALL,
-    GRASS
+    GRASS,
+    START,
+    FINISH
 } Tile;
 
 
@@ -27,7 +29,5 @@ public:
 private:
     const Settings& m_settings;
     int** m_grid;
-    int m_startX, m_startY;
-    int m_finishX, m_finishY;
 
 };
