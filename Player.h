@@ -12,7 +12,7 @@
 class Player {
 public:
     Player();
-    explicit Player(Color color);
+    Player(Color color, Vector2 position);
     ~Player();
 
     Vector2 getPosition() const;

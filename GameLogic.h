@@ -23,7 +23,7 @@ public:
 
 private:
     GameState m_state;
-    Settings m_settings;
+    const Settings& m_settings;
     std::vector<Player> m_players;
     Track m_track;
     int m_currentPlayer = 1;

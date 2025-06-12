@@ -9,7 +9,7 @@ Player::Player() : m_position(3, 8), m_color(BLACK)
 }
 
 // TODO: add player functionality
-Player::Player(Color color) : m_color(color), m_position(Vector2(0,0))
+Player::Player(Color color, Vector2 position) : m_color(color), m_position(position)
 {
 }
 
@@ -45,7 +45,7 @@ void Player::draw()
     // bei der Rechnung: - cellSize / 2,
     // damit der Kreis in der Mitte des Feldes ist (Position x = 1 ist bei Array x = 0)
     DrawCircle( m_position.x * m_settings.cellSize - m_settings.cellSize / 2,
-            m_settings.cellSize / 2,
             m_position.y * m_settings.cellSize - m_settings.cellSize / 2,
+             m_settings.cellSize / 2,
             m_color);
 }

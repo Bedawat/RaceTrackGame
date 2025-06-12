@@ -4,7 +4,8 @@
 
 #include "GameLogic.h"
 
-GameLogic::GameLogic(const Settings& settings) : m_state(START_MENU), m_track(m_settings)
+GameLogic::GameLogic(const Settings& settings) : m_state(START_MENU), m_settings(settings),
+                                           m_track(m_settings), m_currentPlayer(0)
 {
 }
 
@@ -27,34 +28,26 @@ void GameLogic::init()
 {
     switch (m_settings.playerCount)
     {
-    case 1:
+    case 4:
         {
-            m_players.emplace_back(BLACK);
-            break;
-        }
-    case 2:
-        {
-            m_players.emplace_back(BLACK);
-            m_players.emplace_back(DARKBLUE);
-            break;
+            m_players.emplace_back(BLACK, Vector2(3, 8));
         }
     case 3:
         {
-            m_players.emplace_back(BLACK);
-            m_players.emplace_back(DARKBLUE);
-            m_players.emplace_back(LIME);
-            break;
+            m_players.emplace_back(DARKBLUE, Vector2(4, 8));
         }
-    case 4:
+    case 2:
         {
-            m_players.emplace_back(BLACK);
-            m_players.emplace_back(DARKBLUE);
-            m_players.emplace_back(LIME);
-            m_players.emplace_back(ORANGE);
+            m_players.emplace_back(LIME, Vector2(5, 8));
+        }
+    case 1:
+        {
+            m_players.emplace_back(ORANGE, Vector2(6, 8));
             break;
         }
     default: break;
     }
+
 
     m_track.init();
 }

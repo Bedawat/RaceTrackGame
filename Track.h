@@ -25,7 +25,7 @@ public:
     bool checkCollision(int x, int y);
 
 private:
-    Settings m_settings;
+    const Settings& m_settings;
     int** m_grid;
     int m_startX, m_startY;
     int m_finishX, m_finishY;

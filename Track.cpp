@@ -6,7 +6,7 @@
 
 // TODO: add track functionality
 // TODO: add tracks
-Track::Track(const Settings& settings)
+Track::Track(const Settings& settings) : m_settings(settings)
 {
     // Grid erstellen
     m_grid = new int*[m_settings.gridWidth];
