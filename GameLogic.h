@@ -20,6 +20,7 @@ public:
     void init();
     void update();
     void draw();
+    void nextTurn();
 
 private:
     GameState m_state;
@@ -27,5 +28,7 @@ private:
     std::vector<Player> m_players;
     Track m_track;
     int m_currentPlayer = 1;
+    Vector2 m_direction;
+    void handleInput();
 
 };

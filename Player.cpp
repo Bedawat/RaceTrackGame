@@ -48,4 +48,13 @@ void Player::draw()
             m_position.y * m_settings.cellSize - m_settings.cellSize / 2,
              m_settings.cellSize / 2,
             m_color);
+    // Draw the path as lines
+    for (size_t i = 1; i < m_path.size(); ++i)
+    {
+      DrawLine(m_path[i - 1].x * m_settings.cellSize - m_settings.cellSize / 2,
+               m_path[i - 1].y * m_settings.cellSize - m_settings.cellSize / 2,
+               m_path[i].x * m_settings.cellSize - m_settings.cellSize / 2,
+               m_path[i].y * m_settings.cellSize - m_settings.cellSize / 2,
+               Fade(m_color, 0.8f)); // Draw path with semi-transparent color)
+    }
 }

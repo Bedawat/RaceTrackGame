@@ -54,7 +54,11 @@ void GameLogic::init()
 
 void GameLogic::update()
 {
-
+    handleInput();
+    if (IsKeyPressed(KEY_ENTER))
+    {
+        nextTurn();
+    }
 }
 
 void GameLogic::draw()
@@ -64,5 +68,36 @@ void GameLogic::draw()
     for (Player player : m_players)
     {
         player.draw();
+    }
+    DrawCircle((m_players[m_currentPlayer].getPosition().x + m_direction.x) * m_settings.cellSize - m_settings.cellSize / 2,
+               (m_players[m_currentPlayer].getPosition().y + m_direction.y) * m_settings.cellSize - m_settings.cellSize / 2,
+               m_settings.cellSize / 4, YELLOW); // Highlight current player
+
+}
+
+void GameLogic::nextTurn()
+{
+    m_players.at(m_currentPlayer).move(m_direction);
+    m_currentPlayer = (m_currentPlayer + 1) % m_players.size();
+    m_direction = Vector2(0, 0);
+}
+
+void GameLogic::handleInput()
+{
+    if (IsKeyPressed(KEY_UP) && m_direction.y > -1)
+    {
+        m_direction.y += -1;
+    }
+    if (IsKeyPressed(KEY_DOWN) && m_direction.y < 1)
+    {
+        m_direction.y += 1;
+    }
+    if (IsKeyPressed(KEY_LEFT) && m_direction.x > -1)
+    {
+        m_direction.x += -1;
+    }
+    if (IsKeyPressed(KEY_RIGHT) && m_direction.x < 1)
+    {
+        m_direction.x += 1;
     }
 }
