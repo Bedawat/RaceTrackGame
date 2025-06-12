@@ -8,9 +8,9 @@ Player::Player() : m_position(3, 8), m_color(BLACK)
 {
 }
 
-// TODO: add player functionality
 Player::Player(Color color, Vector2 position) : m_color(color), m_position(position)
 {
+    m_path.push_back(m_position);
 }
 
 Player::~Player()
@@ -51,10 +51,13 @@ void Player::draw()
     // Draw the path as lines
     for (size_t i = 1; i < m_path.size(); ++i)
     {
-      DrawLine(m_path[i - 1].x * m_settings.cellSize - m_settings.cellSize / 2,
-               m_path[i - 1].y * m_settings.cellSize - m_settings.cellSize / 2,
-               m_path[i].x * m_settings.cellSize - m_settings.cellSize / 2,
-               m_path[i].y * m_settings.cellSize - m_settings.cellSize / 2,
-               Fade(m_color, 0.8f)); // Draw path with semi-transparent color)
+        DrawLineEx(
+    Vector2{m_path[i - 1].x * m_settings.cellSize - m_settings.cellSize / 2,
+            m_path[i - 1].y * m_settings.cellSize - m_settings.cellSize / 2},
+    Vector2{m_path[i].x * m_settings.cellSize - m_settings.cellSize / 2,
+            m_path[i].y * m_settings.cellSize - m_settings.cellSize / 2},
+    4.0f, // Dicke der Linie in Pixeln
+    Fade(m_color, 0.8f)
+        );
     }
 }
