@@ -18,6 +18,7 @@ public:
 private:
     Settings m_settings;
     GameLogic game;
+    bool m_isRunning = true;
 
     void update();
     void draw();
@@ -25,5 +26,6 @@ private:
     void drawGameMenu();
     void drawGame();
     void drawGameOver();
+    void drawTutorial();
 
 };

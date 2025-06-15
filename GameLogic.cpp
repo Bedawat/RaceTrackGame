@@ -31,7 +31,13 @@ const std::vector<Player>& GameLogic::getPlayers() const
 
 void GameLogic::setGameState(GameState state)
 {
+    m_previousState = m_state;
     m_state = state;
+}
+
+void GameLogic::setPreviousGameState()
+{
+    m_state = m_previousState;
 }
 
 void GameLogic::init()

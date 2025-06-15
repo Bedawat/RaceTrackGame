@@ -9,7 +9,8 @@ typedef enum GameState {
     START_MENU,
     GAME_MENU,
     PLAYING,
-    GAME_OVER
+    GAME_OVER,
+    TUTORIAL,
 } GameState;
 
 struct Settings {

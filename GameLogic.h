@@ -19,6 +19,7 @@ public:
     [[nodiscard]] int getWinner() const;
     [[nodiscard]] const std::vector<Player>& getPlayers() const;
     void setGameState(GameState state);
+    void setPreviousGameState();
     void init();
     void reset();
     void update();
@@ -27,12 +28,13 @@ public:
 
 private:
     GameState m_state;
+    GameState m_previousState = START_MENU;
     const Settings& m_settings;
     std::vector<Player> m_players;
     Track m_track;
     int m_currentPlayer = 1;
     int m_winner = -1; // -1 = no winner yet
-    Vector2 m_direction;
+    Vector2 m_direction = Vector2(0, 0);
     void handleInput();
     void checkCollisions();
 
