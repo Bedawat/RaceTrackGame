@@ -23,6 +23,38 @@ Track::Track(const Settings& settings) : m_settings(settings)
             m_grid[x][y] = STREET;
         }
     }
+    // Checkpoint links oben (1,1 bis 6,6)
+    for (int x = 1; x <= 6; x++)
+    {
+        for (int y = 1; y <= 6; y++)
+        {
+            m_grid[x][y] = CHECKPOINT;
+        }
+    }
+    // Checkpoint rechts oben
+    for (int x = m_settings.gridWidth - 6; x < m_settings.gridWidth; x++)
+    {
+        for (int y = 1; y <= 6; y++)
+        {
+            m_grid[x][y] = CHECKPOINT;
+        }
+    }
+    // Checkpoint links unten
+    for (int x = 1; x <= 6; x++)
+    {
+        for (int y = m_settings.gridHeight - 6; y < m_settings.gridHeight; y++)
+        {
+            m_grid[x][y] = CHECKPOINT;
+        }
+    }
+    // Checkpoint rechts unten
+    for (int x = m_settings.gridWidth - 6; x < m_settings.gridWidth; x++)
+    {
+        for (int y = m_settings.gridHeight - 6; y < m_settings.gridHeight; y++)
+        {
+            m_grid[x][y] = CHECKPOINT;
+        }
+    }
 }
 
 Track::~Track()
@@ -44,6 +76,7 @@ void Track::draw()
 
             switch (m_grid[x][y])
             {
+            case CHECKPOINT:
             case STREET: color = LIGHTGRAY;
                 break;
             case GRASS: color = DARKGREEN;
@@ -54,7 +87,8 @@ void Track::draw()
                 if (x % 2 == 1)
                 {
                     color = WHITE;
-                } else
+                }
+                else
                 {
                     color = BLACK;
                 }
@@ -63,7 +97,8 @@ void Track::draw()
                 if (x % 2 == 0)
                 {
                     color = WHITE;
-                }else
+                }
+                else
                 {
                     color = BLACK;
                 }
@@ -128,9 +163,11 @@ void Track::init() const
     }
 }
 
-bool Track::checkCollision(int x, int y)
+int Track::getTile(const Vector2 pos) const
 {
+    return m_grid[static_cast<int>(pos.x) - 1][static_cast<int>(pos.y) - 1];
 }
+
 
 bool Track::isFinish(Vector2 pos)
 {

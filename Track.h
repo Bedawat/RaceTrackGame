@@ -12,7 +12,8 @@ typedef enum Tile
     WALL,
     GRASS,
     START,
-    FINISH
+    FINISH,
+    CHECKPOINT
 } Tile;
 
 
@@ -24,7 +25,7 @@ public:
     void draw();
     void init() const;
 
-    bool checkCollision(int x, int y);
+    int getTile(Vector2 pos) const;
     bool isFinish(Vector2 pos);
 
 private:

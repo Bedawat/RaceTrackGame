@@ -34,5 +34,6 @@ private:
     int m_winner = -1; // -1 = no winner yet
     Vector2 m_direction;
     void handleInput();
+    void checkCollisions();
 
 };

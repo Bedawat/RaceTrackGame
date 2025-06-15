@@ -32,9 +32,19 @@ Vector2 Player::getVelocity() const
     return m_velocity;
 }
 
+void Player::setVelocity(Vector2 velocity)
+{
+    m_velocity = velocity;
+}
+
 Color Player::getColor() const
 {
     return m_color;
+}
+
+int Player::getCheckpointCount() const
+{
+    return m_checkpointCount;
 }
 
 void Player::move(Vector2 direction)
@@ -70,4 +80,9 @@ void Player::draw()
     Fade(m_color, 0.8f)
         );
     }
+}
+
+void Player::increaseCheckpointCount()
+{
+    m_checkpointCount++;
 }

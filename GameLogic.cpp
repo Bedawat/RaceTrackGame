@@ -97,17 +97,8 @@ void GameLogic::draw()
 
 void GameLogic::nextTurn()
 {
+    checkCollisions();
     m_players.at(m_currentPlayer).move(m_direction);
-
-    // Win-Condition prüfen (z.B. Ziel auf (x, y) == Zielkoordinate)
-    Vector2 pos = m_players.at(m_currentPlayer).getPosition();
-    if (m_track.isFinish(pos)) // Implementiere isFinish entsprechend
-    {
-        m_state = GAME_OVER;
-        m_winner = m_currentPlayer;
-        return;
-    }
-
     m_currentPlayer = (m_currentPlayer + 1) % m_players.size();
     m_direction = Vector2(0, 0);
 }
@@ -129,5 +120,63 @@ void GameLogic::handleInput()
     if (IsKeyPressed(KEY_RIGHT) && m_direction.x < 1)
     {
         m_direction.x += 1;
+    }
+}
+
+void GameLogic::checkCollisions()
+{
+    Player& player = m_players[m_currentPlayer];
+    Vector2 pos = player.getPosition();
+    Vector2 nextPos = player.getPosition();
+    nextPos.x += player.getVelocity().x + m_direction.x;
+    nextPos.y += player.getVelocity().y + m_direction.y;
+    int cell = m_track.getTile(nextPos);
+
+    // Spielfeldgrenzen
+    int maxX = m_settings.gridWidth - 1;
+    int maxY = m_settings.gridHeight - 1;
+
+    if (nextPos.x <= 1)
+    {
+        pos.x = 1;
+        player.setVelocity(Vector2(0, 0));
+        m_direction = Vector2(0, 0);
+    }
+    if (nextPos.x > maxX)
+    {
+        pos.x = maxX;
+        player.setVelocity(Vector2(0, 0));
+        m_direction = Vector2(0, 0);
+    }
+    if (nextPos.y <= 1)
+    {
+        pos.y = 1;
+        player.setVelocity(Vector2(0, 0));
+        m_direction = Vector2(0, 0);
+    }
+    if (nextPos.y > maxY)
+    {
+        pos.y = maxY;
+        player.setVelocity(Vector2(0, 0));
+        m_direction = Vector2(0, 0);
+    }
+
+    switch (cell)
+    {
+    case GRASS:
+        // Geschwindigkeit auf 0
+        player.setVelocity(Vector2(0, 0));
+        break;
+    case CHECKPOINT:
+            player.increaseCheckpointCount();
+        break;
+    case FINISH:
+        if (m_players[m_currentPlayer].getCheckpointCount() >= 4)
+        {
+            m_state = GAME_OVER;
+            m_winner = m_currentPlayer;
+        }
+    default:
+        break;
     }
 }
