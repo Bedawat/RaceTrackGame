@@ -10,7 +10,8 @@
 #include "Track.h"
 
 
-class GameLogic {
+class GameLogic
+{
 public:
     explicit GameLogic(const Settings& settings);
     ~GameLogic();
@@ -37,5 +38,4 @@ private:
     Vector2 m_direction = Vector2(0, 0);
     void handleInput();
     void checkCollisions();
-
 };

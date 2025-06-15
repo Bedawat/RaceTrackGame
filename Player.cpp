@@ -69,20 +69,24 @@ void Player::draw()
     // Center the circle on the grid cell
     // bei der Rechnung: - cellSize / 2,
     // damit der Kreis in der Mitte des Feldes ist (Position x = 1 ist bei Array x = 0)
-    DrawCircle( m_position.x * m_settings.cellSize - m_settings.cellSize / 2,
-            m_position.y * m_settings.cellSize - m_settings.cellSize / 2,
-             m_settings.cellSize / 2,
-            m_color);
+    DrawCircle(m_position.x * m_settings.cellSize - m_settings.cellSize / 2,
+               m_position.y * m_settings.cellSize - m_settings.cellSize / 2,
+               m_settings.cellSize / 2,
+               m_color);
     // Draw the path as lines
     for (size_t i = 1; i < m_path.size(); ++i)
     {
         DrawLineEx(
-    Vector2{m_path[i - 1].x * m_settings.cellSize - m_settings.cellSize / 2,
-            m_path[i - 1].y * m_settings.cellSize - m_settings.cellSize / 2},
-    Vector2{m_path[i].x * m_settings.cellSize - m_settings.cellSize / 2,
-            m_path[i].y * m_settings.cellSize - m_settings.cellSize / 2},
+            Vector2{
+                m_path[i - 1].x * m_settings.cellSize - m_settings.cellSize / 2,
+                m_path[i - 1].y * m_settings.cellSize - m_settings.cellSize / 2
+            },
+            Vector2{
+                m_path[i].x * m_settings.cellSize - m_settings.cellSize / 2,
+                m_path[i].y * m_settings.cellSize - m_settings.cellSize / 2
+            },
             4.0f, // Dicke der Linie in Pixeln
-    Fade(m_color, 0.8f)
+            Fade(m_color, 0.8f)
         );
     }
 }

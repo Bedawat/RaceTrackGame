@@ -5,7 +5,8 @@
 #pragma once
 #include <algorithm>
 
-typedef enum GameState {
+typedef enum GameState
+{
     START_MENU,
     GAME_MENU,
     PLAYING,
@@ -13,7 +14,8 @@ typedef enum GameState {
     TUTORIAL,
 } GameState;
 
-struct Settings {
+struct Settings
+{
     // maybe not static? -> GameEngine member variable and give it to every other class through const ref
     // Grid dimensions
     const int gridWidth = 42;
@@ -27,5 +29,4 @@ struct Settings {
 
     int playerCount = 1;
     int TrackNumber = 1;
-
 };

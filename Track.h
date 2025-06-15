@@ -17,7 +17,8 @@ typedef enum Tile
 } Tile;
 
 
-class Track {
+class Track
+{
 public:
     explicit Track(const Settings& settings);
     ~Track();
@@ -34,5 +35,4 @@ private:
     int** m_grid;
 
     void standardGrid() const;
-
 };

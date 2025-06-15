@@ -7,13 +7,13 @@
 #include "Settings.h"
 
 
-class GameEngine {
+class GameEngine
+{
 public:
     GameEngine();
     ~GameEngine();
 
     void run();
-
 
 private:
     Settings m_settings;
@@ -27,5 +27,4 @@ private:
     void drawGame();
     void drawGameOver();
     void drawTutorial();
-
 };

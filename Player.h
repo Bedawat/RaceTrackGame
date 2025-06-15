@@ -9,7 +9,8 @@
 #include "Settings.h"
 
 
-class Player {
+class Player
+{
 public:
     Player();
     Player(Color color, Vector2 position);
@@ -29,10 +30,9 @@ public:
 
 private:
     Vector2 m_position{};
-    Vector2 m_velocity = Vector2(0,0);
+    Vector2 m_velocity = Vector2(0, 0);
     Color m_color;
     Settings m_settings;
     std::vector<Vector2> m_path;
     int m_checkpointCount = 0;
-
 };

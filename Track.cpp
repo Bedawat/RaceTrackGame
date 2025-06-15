@@ -220,5 +220,3 @@ int Track::getTile(const Vector2 pos) const
 {
     return m_grid[static_cast<int>(pos.x) - 1][static_cast<int>(pos.y) - 1];
 }
-
-
