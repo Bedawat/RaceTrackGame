@@ -47,6 +47,11 @@ int Player::getCheckpointCount() const
     return m_checkpointCount;
 }
 
+int Player::getPathLength() const
+{
+    return static_cast<int>(m_path.size());
+}
+
 void Player::move(Vector2 direction)
 {
     m_velocity.x += direction.x;

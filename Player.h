@@ -21,6 +21,7 @@ public:
     void setVelocity(Vector2 velocity);
     Color getColor() const;
     int getCheckpointCount() const;
+    int getPathLength() const;
 
     void move(Vector2 direction);
     void draw();

@@ -5,7 +5,7 @@
 #include "GameLogic.h"
 
 GameLogic::GameLogic(const Settings& settings) : m_state(START_MENU), m_settings(settings),
-                                           m_track(m_settings), m_currentPlayer(0)
+                                                 m_track(m_settings), m_currentPlayer(0)
 {
 }
 
@@ -99,21 +99,24 @@ void GameLogic::draw()
     // Draw the direction Vector where the current player is moving
     // Erst Rand zeichnen (schwarz, etwas größer), dann den eigentlichen Kreis
     DrawCircle(
-        (m_players[m_currentPlayer].getPosition().x + m_players[m_currentPlayer].getVelocity().x + m_direction.x) * m_settings.cellSize - m_settings.cellSize / 2,
-        (m_players[m_currentPlayer].getPosition().y + m_players[m_currentPlayer].getVelocity().y + m_direction.y) * m_settings.cellSize - m_settings.cellSize / 2,
+        (m_players[m_currentPlayer].getPosition().x + m_players[m_currentPlayer].getVelocity().x + m_direction.x) *
+        m_settings.cellSize - m_settings.cellSize / 2,
+        (m_players[m_currentPlayer].getPosition().y + m_players[m_currentPlayer].getVelocity().y + m_direction.y) *
+        m_settings.cellSize - m_settings.cellSize / 2,
         m_settings.cellSize / 4 + 2, // +2 Pixel für den Rand
         BLACK
     );
-    DrawCircle((m_players[m_currentPlayer].getPosition().x + m_players[m_currentPlayer].getVelocity().x + m_direction.x) * m_settings.cellSize - m_settings.cellSize / 2,
-               (m_players[m_currentPlayer].getPosition().y + m_players[m_currentPlayer].getVelocity().y + m_direction.y) * m_settings.cellSize - m_settings.cellSize / 2,
-               m_settings.cellSize / 4, m_players[m_currentPlayer].getColor()); // Highlight current player
-
+    DrawCircle(
+        (m_players[m_currentPlayer].getPosition().x + m_players[m_currentPlayer].getVelocity().x + m_direction.x) *
+        m_settings.cellSize - m_settings.cellSize / 2,
+        (m_players[m_currentPlayer].getPosition().y + m_players[m_currentPlayer].getVelocity().y + m_direction.y) *
+        m_settings.cellSize - m_settings.cellSize / 2,
+        m_settings.cellSize / 4, m_players[m_currentPlayer].getColor()); // Highlight current player
 }
 
 void GameLogic::nextTurn()
 {
     checkCollisions();
-    m_players.at(m_currentPlayer).move(m_direction);
     m_currentPlayer = (m_currentPlayer + 1) % m_players.size();
     m_direction = Vector2(0, 0);
 }
@@ -141,7 +144,6 @@ void GameLogic::handleInput()
 void GameLogic::checkCollisions()
 {
     Player& player = m_players[m_currentPlayer];
-    Vector2 pos = player.getPosition();
     Vector2 nextPos = player.getPosition();
     nextPos.x += player.getVelocity().x + m_direction.x;
     nextPos.y += player.getVelocity().y + m_direction.y;
@@ -153,35 +155,51 @@ void GameLogic::checkCollisions()
     int maxX = m_settings.gridWidth - 1;
     int maxY = m_settings.gridHeight - 1;
 
-    if (nextPos.x <= minX) { nextPos.x = minX; outOfBounds = true; }
-    if (nextPos.x > maxX) { nextPos.x = maxX; outOfBounds = true; }
-    if (nextPos.y <= minY) { nextPos.y = minY; outOfBounds = true; }
-    if (nextPos.y > maxY) { nextPos.y = maxY; outOfBounds = true; }
+    if (nextPos.x <= minX)
+    {
+        nextPos.x = minX;
+        outOfBounds = true;
+    }
+    if (nextPos.x > maxX)
+    {
+        nextPos.x = maxX;
+        outOfBounds = true;
+    }
+    if (nextPos.y <= minY)
+    {
+        nextPos.y = minY;
+        outOfBounds = true;
+    }
+    if (nextPos.y > maxY)
+    {
+        nextPos.y = maxY;
+        outOfBounds = true;
+    }
 
-    if (outOfBounds) {
+    if (outOfBounds)
+    {
         player.setVelocity(Vector2(0, 0));
         m_direction = Vector2(0, 0);
         return; // Spieler ist außerhalb des Spielfelds, keine weitere Verarbeitung
     }
 
-    int cell = m_track.getTile(nextPos);
-
-    switch (cell)
+    switch (m_track.getTile(nextPos))
     {
     case GRASS:
+        player.move(m_direction);
         // Geschwindigkeit auf 0
         player.setVelocity(Vector2(0, 0));
         break;
-    case CHECKPOINT:
-            player.increaseCheckpointCount();
-        break;
     case FINISH:
-        if (m_players[m_currentPlayer].getCheckpointCount() >= 4)
+        if (player.getCheckpointCount() >= 4)
         {
             m_state = GAME_OVER;
             m_winner = m_currentPlayer;
         }
+    case CHECKPOINT:
+        player.increaseCheckpointCount();
     default:
+        player.move(m_direction);
         break;
     }
 }
