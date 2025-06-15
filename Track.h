@@ -25,6 +25,7 @@ public:
     void init() const;
 
     bool checkCollision(int x, int y);
+    bool isFinish(Vector2 pos);
 
 private:
     const Settings& m_settings;

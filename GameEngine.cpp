@@ -51,7 +51,12 @@ void GameEngine::update()
         }
     case GAME_OVER:
         {
-
+            // Wenn Enter gedrückt wurde, zurück zum START_MENU
+            if (IsKeyPressed(KEY_ENTER))
+            {
+                game.reset();
+            }
+            break;
         }
     }
 
@@ -148,4 +153,17 @@ void GameEngine::drawGame()
 void GameEngine::drawGameOver()
 {
     // TODO: implement Game Over window
+    BeginDrawing();
+    ClearBackground(RAYWHITE);
+    DrawText("Game Over!", 200, 100, 40, RED);
+    if (game.getWinner() >= 0)
+    {
+        std::string text = "Gewinner: Spieler " + std::to_string(game.getWinner() + 1);
+        // +1 because players are 0-indexed, but we want to display 1-indexed
+        Player winner = game.getPlayers().at(game.getWinner());
+        DrawText(text.c_str(), 200, 200, 30, winner.getColor());
+    }
+    DrawText("Press ENTER to return to the main menu", 200, 300, 20, DARKGRAY);
+    EndDrawing();
+
 }

@@ -32,6 +32,11 @@ Vector2 Player::getVelocity() const
     return m_velocity;
 }
 
+Color Player::getColor() const
+{
+    return m_color;
+}
+
 void Player::move(Vector2 direction)
 {
     m_velocity.x += direction.x;

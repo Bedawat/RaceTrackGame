@@ -16,8 +16,11 @@ public:
     ~GameLogic();
 
     [[nodiscard]] GameState getGameState() const;
+    [[nodiscard]] int getWinner() const;
+    [[nodiscard]] const std::vector<Player>& getPlayers() const;
     void setGameState(GameState state);
     void init();
+    void reset();
     void update();
     void draw();
     void nextTurn();
@@ -28,6 +31,7 @@ private:
     std::vector<Player> m_players;
     Track m_track;
     int m_currentPlayer = 1;
+    int m_winner = -1; // -1 = no winner yet
     Vector2 m_direction;
     void handleInput();
 

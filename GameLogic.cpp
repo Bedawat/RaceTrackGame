@@ -19,6 +19,16 @@ GameState GameLogic::getGameState() const
     return m_state;
 }
 
+int GameLogic::getWinner() const
+{
+    return m_winner;
+}
+
+const std::vector<Player>& GameLogic::getPlayers() const
+{
+    return m_players;
+}
+
 void GameLogic::setGameState(GameState state)
 {
     m_state = state;
@@ -52,6 +62,15 @@ void GameLogic::init()
     m_track.init();
 }
 
+void GameLogic::reset()
+{
+    m_state = START_MENU;
+    m_players.clear();
+    m_currentPlayer = 0;
+    m_winner = -1; // Reset winner
+    m_direction = Vector2(0, 0);
+}
+
 void GameLogic::update()
 {
     handleInput();
@@ -79,6 +98,16 @@ void GameLogic::draw()
 void GameLogic::nextTurn()
 {
     m_players.at(m_currentPlayer).move(m_direction);
+
+    // Win-Condition prüfen (z.B. Ziel auf (x, y) == Zielkoordinate)
+    Vector2 pos = m_players.at(m_currentPlayer).getPosition();
+    if (m_track.isFinish(pos)) // Implementiere isFinish entsprechend
+    {
+        m_state = GAME_OVER;
+        m_winner = m_currentPlayer;
+        return;
+    }
+
     m_currentPlayer = (m_currentPlayer + 1) % m_players.size();
     m_direction = Vector2(0, 0);
 }

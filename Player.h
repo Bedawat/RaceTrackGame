@@ -18,6 +18,7 @@ public:
     Vector2 getPosition() const;
     void setPosition(Vector2 position);
     Vector2 getVelocity() const;
+    Color getColor() const;
 
     void move(Vector2 direction);
     void draw();

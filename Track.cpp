@@ -131,3 +131,12 @@ void Track::init() const
 bool Track::checkCollision(int x, int y)
 {
 }
+
+bool Track::isFinish(Vector2 pos)
+{
+    if (pos.x < 0 || pos.x >= m_settings.gridWidth || pos.y < 0 || pos.y >= m_settings.gridHeight)
+    {
+        return false; // Ausserhalb des Grids
+    }
+    return m_grid[(int)pos.x - 1][(int)pos.y - 1] == FINISH;
+}
