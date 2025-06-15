@@ -24,12 +24,15 @@ public:
 
     void draw();
     void init() const;
+    void reset() const;
+
 
     int getTile(Vector2 pos) const;
-    bool isFinish(Vector2 pos);
 
 private:
     const Settings& m_settings;
     int** m_grid;
+
+    void standardGrid() const;
 
 };

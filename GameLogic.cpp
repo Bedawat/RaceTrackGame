@@ -75,6 +75,7 @@ void GameLogic::reset()
     m_currentPlayer = 0;
     m_winner = -1; // Reset winner
     m_direction = Vector2(0, 0);
+    m_track.reset();
 }
 
 void GameLogic::update()
