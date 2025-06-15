@@ -36,8 +36,7 @@ void Track::draw()
 
             switch (m_grid[x][y])
             {
-            case CHECKPOINT: color = BLUE;
-                break;
+            case CHECKPOINT:
             case STREET: color = LIGHTGRAY;
                 break;
             case GRASS: color = DARKGREEN;

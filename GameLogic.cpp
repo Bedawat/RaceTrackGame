@@ -46,7 +46,7 @@ void GameLogic::init()
     {
     case 4:
         {
-            m_players.emplace_back(BLACK, Vector2(3, 8));
+            m_players.emplace_back(RED, Vector2(3, 8));
         }
     case 3:
         {

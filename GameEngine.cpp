@@ -349,7 +349,7 @@ void GameEngine::drawTutorial()
     DrawText(title, centerX - MeasureText(title, 28) / 2, y, 28, DARKGRAY);
     y += lineHeight + 10;
 
-    const char* line1 = "In jedem Spielzug bewegt der Spieler sein Auto einem Gitterpunkt zu einem anderen.";
+    const char* line1 = "In jedem Spielzug bewegt der Spieler sein Auto von einem Gitterpunkt zu einem anderen.";
     DrawText(line1, centerX - MeasureText(line1, 20) / 2, y, 20, GRAY);
     y += lineHeight;
 
