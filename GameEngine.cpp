@@ -38,7 +38,8 @@ void GameEngine::update()
             {
                 game.setGameState(PLAYING);
                 game.init();
-            } else if (IsKeyPressed(KEY_ESCAPE))
+            }
+            else if (IsKeyPressed(KEY_ESCAPE))
             {
                 m_isRunning = false;
             }
@@ -49,7 +50,8 @@ void GameEngine::update()
             if (IsKeyPressed(KEY_ENTER))
             {
                 game.setGameState(PLAYING);
-            } else if (IsKeyPressed(KEY_ESCAPE))
+            }
+            else if (IsKeyPressed(KEY_ESCAPE))
             {
                 game.reset();
                 game.setGameState(START_MENU);
@@ -71,13 +73,14 @@ void GameEngine::update()
             if (IsKeyPressed(KEY_ENTER))
             {
                 game.reset();
-            } else if (IsKeyPressed(KEY_ESCAPE))
+            }
+            else if (IsKeyPressed(KEY_ESCAPE))
             {
                 m_isRunning = false;
             }
             break;
         }
-        case TUTORIAL:
+    case TUTORIAL:
         {
             if (IsKeyPressed(KEY_ESCAPE))
             {
@@ -86,7 +89,6 @@ void GameEngine::update()
             break;
         }
     }
-
 }
 
 void GameEngine::draw()
@@ -113,7 +115,7 @@ void GameEngine::draw()
             drawGameOver();
             break;
         }
-        case TUTORIAL:
+    case TUTORIAL:
         {
             drawTutorial();
             break;
@@ -163,8 +165,12 @@ void GameEngine::drawStartMenu()
 
     DrawText(playersText.c_str(), playersStartX, y, 20, DARKGRAY);
 
-    Rectangle btnMinusPlayers = {static_cast<float>(playersStartX + playersTextWidth + 10), static_cast<float>(y), 30.0f, 30.0f};
-    Rectangle btnPlusPlayers  = {static_cast<float>(playersStartX + playersTextWidth + 50), static_cast<float>(y), 30.0f, 30.0f};
+    Rectangle btnMinusPlayers = {
+        static_cast<float>(playersStartX + playersTextWidth + 10), static_cast<float>(y), 30.0f, 30.0f
+    };
+    Rectangle btnPlusPlayers = {
+        static_cast<float>(playersStartX + playersTextWidth + 50), static_cast<float>(y), 30.0f, 30.0f
+    };
     DrawRectangleRec(btnMinusPlayers, LIGHTGRAY);
     DrawRectangleRec(btnPlusPlayers, LIGHTGRAY);
     DrawText("-", playersStartX + playersTextWidth + 17, y + 5, 20, DARKGRAY);
@@ -180,8 +186,12 @@ void GameEngine::drawStartMenu()
 
     DrawText(trackText.c_str(), trackStartX, y, 20, DARKGRAY);
 
-    Rectangle btnMinusTrack  = {static_cast<float>(trackStartX + trackTextWidth + 10), static_cast<float>(y), 30.0f, 30.0f};
-    Rectangle btnPlusTrack   = {static_cast<float>(trackStartX + trackTextWidth + 50), static_cast<float>(y), 30.0f, 30.0f};
+    Rectangle btnMinusTrack = {
+        static_cast<float>(trackStartX + trackTextWidth + 10), static_cast<float>(y), 30.0f, 30.0f
+    };
+    Rectangle btnPlusTrack = {
+        static_cast<float>(trackStartX + trackTextWidth + 50), static_cast<float>(y), 30.0f, 30.0f
+    };
     DrawRectangleRec(btnMinusTrack, LIGHTGRAY);
     DrawRectangleRec(btnPlusTrack, LIGHTGRAY);
     DrawText("-", trackStartX + trackTextWidth + 17, y + 5, 20, DARKGRAY);
@@ -194,7 +204,10 @@ void GameEngine::drawStartMenu()
     int tutBtnX = centerX - tutBtnWidth / 2;
     int tutBtnY = y;
 
-    Rectangle btnTutorial = {static_cast<float>(tutBtnX), static_cast<float>(tutBtnY), static_cast<float>(tutBtnWidth), static_cast<float>(tutBtnHeight)};
+    Rectangle btnTutorial = {
+        static_cast<float>(tutBtnX), static_cast<float>(tutBtnY), static_cast<float>(tutBtnWidth),
+        static_cast<float>(tutBtnHeight)
+    };
     DrawRectangleRec(btnTutorial, LIGHTGRAY);
     DrawText(tutorialText, tutBtnX + 20, tutBtnY + 8, 22, DARKGRAY);
 
@@ -211,7 +224,8 @@ void GameEngine::drawStartMenu()
             m_settings.TrackNumber--;
         if (CheckCollisionPointRec(mouse, btnPlusTrack) && m_settings.TrackNumber < 3)
             m_settings.TrackNumber++;
-        if (CheckCollisionPointRec(mouse, btnTutorial)) {
+        if (CheckCollisionPointRec(mouse, btnTutorial))
+        {
             game.setGameState(TUTORIAL);
         }
     }
@@ -262,13 +276,18 @@ void GameEngine::drawGameMenu()
     int tutBtnX = centerX - tutBtnWidth / 2;
     int tutBtnY = y;
 
-    Rectangle btnTutorial = {static_cast<float>(tutBtnX), static_cast<float>(tutBtnY), static_cast<float>(tutBtnWidth), static_cast<float>(tutBtnHeight)};
+    Rectangle btnTutorial = {
+        static_cast<float>(tutBtnX), static_cast<float>(tutBtnY), static_cast<float>(tutBtnWidth),
+        static_cast<float>(tutBtnHeight)
+    };
     DrawRectangleRec(btnTutorial, LIGHTGRAY);
     DrawText(tutorialText, tutBtnX + 20, tutBtnY + 8, 22, DARKGRAY);
 
-    if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+    if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+    {
         Vector2 mouse = GetMousePosition();
-        if (CheckCollisionPointRec(mouse, btnTutorial)) {
+        if (CheckCollisionPointRec(mouse, btnTutorial))
+        {
             game.setGameState(TUTORIAL);
         }
     }
@@ -303,6 +322,9 @@ void GameEngine::drawGameOver()
         Player winner = game.getPlayers().at(game.getWinner());
         DrawText(text.c_str(), centerX - MeasureText(text.c_str(), 30) / 2, y, 30, winner.getColor());
         y += lineHeight;
+        std::string pathText = "Anzahl der Spielzüge: " + std::to_string(winner.getPathLength());
+        DrawText(pathText.c_str(), centerX - MeasureText(pathText.c_str(), 30) / 2, y, 30, winner.getColor());
+        y += lineHeight + 10;
     }
 
     const char* info = "Drücke ENTER, um zum Hauptmenü zurückzukehren.";
@@ -327,7 +349,7 @@ void GameEngine::drawTutorial()
     DrawText(title, centerX - MeasureText(title, 28) / 2, y, 28, DARKGRAY);
     y += lineHeight + 10;
 
-    const char* line1 = "Alle Züge erfolgen von einem Gitterpunkt zu einem anderen.";
+    const char* line1 = "In jedem Spielzug bewegt der Spieler sein Auto einem Gitterpunkt zu einem anderen.";
     DrawText(line1, centerX - MeasureText(line1, 20) / 2, y, 20, GRAY);
     y += lineHeight;
 
@@ -337,18 +359,6 @@ void GameEngine::drawTutorial()
 
     const char* line3 = "oben, unten, links, rechts und die vier Diagonalrichtungen.";
     DrawText(line3, centerX - MeasureText(line3, 20) / 2, y, 20, GRAY);
-    y += lineHeight;
-
-    const char* line4 = "Die Spieler bewegen ihre Autos abwechselnd.";
-    DrawText(line4, centerX - MeasureText(line4, 20) / 2, y, 20, GRAY);
-    y += lineHeight;
-
-    const char* line5 = "Jeder Zug wird durch eine Linie markiert,";
-    DrawText(line5, centerX - MeasureText(line5, 20) / 2, y, 20, GRAY);
-    y += lineHeight;
-
-    const char* line6 = "die vom Startpunkt des Zugs zum neuen Punkt führt.";
-    DrawText(line6, centerX - MeasureText(line6, 20) / 2, y, 20, GRAY);
     y += lineHeight + 10;
 
     const char* line7 = "Der erste Zug eines Spielers muss zu einem der acht Nachbarpunkte";
@@ -374,6 +384,18 @@ void GameEngine::drawTutorial()
     const char* line12 = "oder stattdessen einen der acht Nachbarpunkte dieses Hauptpunkts wählen.";
     DrawText(line12, centerX - MeasureText(line12, 20) / 2, y, 20, GRAY);
     y += lineHeight + 20;
+
+    const char* line4 = "Die Spieler bewegen ihre Autos abwechselnd.";
+    DrawText(line4, centerX - MeasureText(line4, 20) / 2, y, 20, GRAY);
+    y += lineHeight;
+
+    const char* line5 = "Jeder Spielzug wird durch eine Linie markiert,";
+    DrawText(line5, centerX - MeasureText(line5, 20) / 2, y, 20, GRAY);
+    y += lineHeight;
+
+    const char* line6 = "die vom Startpunkt des Zugs zum neuen Punkt führt.";
+    DrawText(line6, centerX - MeasureText(line6, 20) / 2, y, 20, GRAY);
+    y += lineHeight + 10;
 
     const char* info = "Drücke ESC, um zurückzukehren.";
     DrawText(info, centerX - MeasureText(info, 20) / 2, y, 20, DARKGRAY);
