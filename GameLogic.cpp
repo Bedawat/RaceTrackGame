@@ -88,10 +88,18 @@ void GameLogic::draw()
     {
         player.draw();
     }
+
     // Draw the direction Vector where the current player is moving
+    // Erst Rand zeichnen (schwarz, etwas größer), dann den eigentlichen Kreis
+    DrawCircle(
+        (m_players[m_currentPlayer].getPosition().x + m_players[m_currentPlayer].getVelocity().x + m_direction.x) * m_settings.cellSize - m_settings.cellSize / 2,
+        (m_players[m_currentPlayer].getPosition().y + m_players[m_currentPlayer].getVelocity().y + m_direction.y) * m_settings.cellSize - m_settings.cellSize / 2,
+        m_settings.cellSize / 4 + 2, // +2 Pixel für den Rand
+        BLACK
+    );
     DrawCircle((m_players[m_currentPlayer].getPosition().x + m_players[m_currentPlayer].getVelocity().x + m_direction.x) * m_settings.cellSize - m_settings.cellSize / 2,
                (m_players[m_currentPlayer].getPosition().y + m_players[m_currentPlayer].getVelocity().y + m_direction.y) * m_settings.cellSize - m_settings.cellSize / 2,
-               m_settings.cellSize / 4, YELLOW); // Highlight current player
+               m_settings.cellSize / 4, m_players[m_currentPlayer].getColor()); // Highlight current player
 
 }
 
@@ -130,36 +138,26 @@ void GameLogic::checkCollisions()
     Vector2 nextPos = player.getPosition();
     nextPos.x += player.getVelocity().x + m_direction.x;
     nextPos.y += player.getVelocity().y + m_direction.y;
-    int cell = m_track.getTile(nextPos);
 
-    // Spielfeldgrenzen
+
+    // Spielfeldgrenzen prüfen und ggf. anpassen
+    bool outOfBounds = false;
+    int minX = 1, minY = 1;
     int maxX = m_settings.gridWidth - 1;
     int maxY = m_settings.gridHeight - 1;
 
-    if (nextPos.x <= 1)
-    {
-        pos.x = 1;
+    if (nextPos.x <= minX) { nextPos.x = minX; outOfBounds = true; }
+    if (nextPos.x > maxX) { nextPos.x = maxX; outOfBounds = true; }
+    if (nextPos.y <= minY) { nextPos.y = minY; outOfBounds = true; }
+    if (nextPos.y > maxY) { nextPos.y = maxY; outOfBounds = true; }
+
+    if (outOfBounds) {
         player.setVelocity(Vector2(0, 0));
         m_direction = Vector2(0, 0);
+        return; // Spieler ist außerhalb des Spielfelds, keine weitere Verarbeitung
     }
-    if (nextPos.x > maxX)
-    {
-        pos.x = maxX;
-        player.setVelocity(Vector2(0, 0));
-        m_direction = Vector2(0, 0);
-    }
-    if (nextPos.y <= 1)
-    {
-        pos.y = 1;
-        player.setVelocity(Vector2(0, 0));
-        m_direction = Vector2(0, 0);
-    }
-    if (nextPos.y > maxY)
-    {
-        pos.y = maxY;
-        player.setVelocity(Vector2(0, 0));
-        m_direction = Vector2(0, 0);
-    }
+
+    int cell = m_track.getTile(nextPos);
 
     switch (cell)
     {
