@@ -173,6 +173,10 @@ void GameLogic::checkCollisions()
     Vector2 nextPos = player.getPosition();
     nextPos.x += player.getVelocity().x + m_direction.x;
     nextPos.y += player.getVelocity().y + m_direction.y;
+    // Temporäre Position für Kollisionserkennung
+    Vector2 tempPos = player.getPosition();
+    tempPos.x += player.getVelocity().x;
+    tempPos.y += player.getVelocity().y;
 
 
     // Spielfeldgrenzen prüfen und ggf. anpassen
@@ -211,6 +215,14 @@ void GameLogic::checkCollisions()
 
     switch (m_track.getTile(nextPos))
     {
+    case WALL:
+
+        if (m_track.getTile(tempPos) == STREET || m_track.getTile(tempPos) == GRASS)
+        {
+            player.setPosition(tempPos);
+        }
+        player.setVelocity(Vector2(0, 0));
+        break;
     case GRASS:
         player.move(m_direction);
         // Geschwindigkeit auf 0
