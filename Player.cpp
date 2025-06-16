@@ -6,6 +6,7 @@
 
 Player::Player() : m_position(3, 8), m_color(BLACK)
 {
+    m_path.push_back(m_position);
 }
 
 Player::Player(Color color, Vector2 position) : m_color(color), m_position(position)
@@ -52,6 +53,12 @@ int Player::getPathLength() const
     return static_cast<int>(m_path.size());
 }
 
+/** Moves the player in the specified direction by updating its velocity and position.
+ * The position is updated based on the current velocity and the direction vector.
+ * The new position is added to the path for tracking movement history.
+ *
+ * @param direction The direction vector to move the player in.
+ */
 void Player::move(Vector2 direction)
 {
     m_velocity.x += direction.x;
@@ -62,7 +69,10 @@ void Player::move(Vector2 direction)
 
     m_path.push_back(m_position);
 }
-
+/** Draws the player and its movement path on the screen.
+ * The player is represented as a circle at its current position, and the path is drawn as lines connecting
+ * the previous positions in the path vector.
+ */
 void Player::draw()
 {
     // Draw the player as a circle at its position
@@ -73,6 +83,7 @@ void Player::draw()
                m_position.y * m_settings.cellSize - m_settings.cellSize / 2,
                m_settings.cellSize / 2,
                m_color);
+
     // Draw the path as lines
     for (size_t i = 1; i < m_path.size(); ++i)
     {

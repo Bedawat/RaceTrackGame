@@ -18,6 +18,9 @@ GameEngine::~GameEngine()
     CloseWindow();
 }
 
+/** * Starts the game loop, which runs until the game is not running or the window is closed.
+ * It calls the update and draw methods in each iteration.
+ */
 void GameEngine::run()
 {
     while (m_isRunning && !WindowShouldClose())
@@ -27,6 +30,9 @@ void GameEngine::run()
     }
 }
 
+/** Updates the game state based on user input and the current game state.
+ * It handles transitions between different game states such as START_MENU, GAME_MENU, PLAYING, GAME_OVER, and TUTORIAL.
+ */
 void GameEngine::update()
 {
     switch (game.getGameState())
@@ -91,6 +97,9 @@ void GameEngine::update()
     }
 }
 
+/** Draws the current game state based on the game state.
+ * It calls different draw methods for each game state: START_MENU, GAME_MENU, PLAYING, GAME_OVER, and TUTORIAL.
+ */
 void GameEngine::draw()
 {
     switch (game.getGameState())
@@ -123,7 +132,10 @@ void GameEngine::draw()
     }
 }
 
-
+/** Draws the start menu with game instructions, player count and track selection.
+ * It displays the title, instructions, player count buttons, track selection buttons, and a tutorial button.
+ * The player can adjust the number of players and the track using mouse clicks on the respective buttons.
+ */
 void GameEngine::drawStartMenu()
 {
     BeginDrawing();
@@ -233,6 +245,8 @@ void GameEngine::drawStartMenu()
     EndDrawing();
 }
 
+/** Draws the game menu with game instructions and a tutorial button.
+ */
 void GameEngine::drawGameMenu()
 {
     BeginDrawing();
@@ -295,6 +309,10 @@ void GameEngine::drawGameMenu()
     EndDrawing();
 }
 
+/** Draws the game state when the game is being played.
+ * It clears the background, draws the track, players, and their paths.
+ * It also highlights the current player's direction.
+ */
 void GameEngine::drawGame()
 {
     BeginDrawing();
@@ -303,6 +321,9 @@ void GameEngine::drawGame()
     EndDrawing();
 }
 
+/** Draws the game over screen with the winner's information and instructions to return to the main menu or exit.
+ * It displays the winner's name, number of moves, and instructions for returning to the main menu or exiting the game.
+ */
 void GameEngine::drawGameOver()
 {
     BeginDrawing();
@@ -336,6 +357,9 @@ void GameEngine::drawGameOver()
     EndDrawing();
 }
 
+/** Draws the tutorial screen with detailed instructions on how to play the game.
+ * It explains the movement mechanics, grid points, and player actions in a step-by-step manner.
+ */
 void GameEngine::drawTutorial()
 {
     BeginDrawing();

@@ -4,8 +4,7 @@
 
 #include "Track.h"
 
-// TODO: add track functionality
-// TODO: add tracks
+
 Track::Track(const Settings& settings) : m_settings(settings)
 {
     // Grid erstellen
@@ -26,6 +25,9 @@ Track::~Track()
     delete[] m_grid;
 }
 
+/**
+ * @brief zeichnet das Spielfeld
+ */
 void Track::draw()
 {
     for (int x = 0; x < m_settings.gridWidth; x++)
@@ -67,6 +69,10 @@ void Track::draw()
     }
 }
 
+/**
+ * @brief Initialisiert die Strecke basierend auf der Track-Nummer
+ *        und setzt das Grid entsprechend.
+ */
 void Track::init() const
 {
     switch (m_settings.TrackNumber)
@@ -155,11 +161,20 @@ void Track::init() const
     }
 }
 
+/**
+ * @brief Setzt das Spielfeld auf den Standardzustand zurück.
+ *        Das bedeutet, dass alle Felder auf "Street" gesetzt werden
+ *        und die Checkpoints und Wände entsprechend platziert werden.
+ */
 void Track::reset() const
 {
     standardGrid();
 }
 
+/** * @brief Setzt das Grid auf den Standardzustand zurück.
+ *        Das bedeutet, dass alle Felder auf "Street" gesetzt werden
+ *        und die Checkpoints und Wände entsprechend platziert werden.
+ */
 void Track::standardGrid() const
 {
     // Ganzes Grid auf "Street" setzen
@@ -215,6 +230,14 @@ void Track::standardGrid() const
     }
 }
 
+/**
+ * @brief Gibt den Tile-Typ an der angegebenen Position zurück.
+ *        Die Position wird als Vector2 angegeben, wobei x und y
+ *        die Koordinaten im Grid repräsentieren.
+ *
+ * @param pos Die Position im Grid.
+ * @return Der Tile-Typ an der angegebenen Position.
+ */
 int Track::getTile(const Vector2 pos) const
 {
     return m_grid[static_cast<int>(pos.x) - 1][static_cast<int>(pos.y) - 1];

@@ -16,7 +16,6 @@ typedef enum GameState
 
 struct Settings
 {
-    // maybe not static? -> GameEngine member variable and give it to every other class through const ref
     // Grid dimensions
     const int gridWidth = 42;
     const int gridHeight = 30;

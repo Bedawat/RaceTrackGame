@@ -40,6 +40,10 @@ void GameLogic::setPreviousGameState()
     m_state = m_previousState;
 }
 
+/** * Initializes the game logic by setting up players based on the player count in settings.
+ * Each player is initialized with a specific color and starting position.
+ * The track is also initialized.
+ */
 void GameLogic::init()
 {
     switch (m_settings.playerCount)
@@ -68,6 +72,10 @@ void GameLogic::init()
     m_track.init();
 }
 
+/** Resets the game state to the starting menu.
+ * Clears the player list, resets the current player index, winner index,
+ * direction vector, and track state.
+ */
 void GameLogic::reset()
 {
     m_state = START_MENU;
@@ -78,6 +86,9 @@ void GameLogic::reset()
     m_track.reset();
 }
 
+/** * Updates the game logic by handling input and checking for turn changes.
+ * If the ENTER key is pressed, it triggers the next turn.
+ */
 void GameLogic::update()
 {
     handleInput();
@@ -87,6 +98,9 @@ void GameLogic::update()
     }
 }
 
+/** Draws the game state, including the track and players.
+ * It also highlights the current player's direction of movement.
+ */
 void GameLogic::draw()
 {
     m_track.draw();
@@ -111,9 +125,13 @@ void GameLogic::draw()
         m_settings.cellSize - m_settings.cellSize / 2,
         (m_players[m_currentPlayer].getPosition().y + m_players[m_currentPlayer].getVelocity().y + m_direction.y) *
         m_settings.cellSize - m_settings.cellSize / 2,
-        m_settings.cellSize / 4, m_players[m_currentPlayer].getColor()); // Highlight current player
+        m_settings.cellSize / 4, m_players[m_currentPlayer].getColor());
 }
 
+/** Advances to the next player's turn.
+ * It checks for collisions, updates the current player index, and resets the direction vector.
+ * If the current player reaches the finish line with enough checkpoints, the game state is set to GAME_OVER.
+ */
 void GameLogic::nextTurn()
 {
     checkCollisions();
@@ -121,6 +139,10 @@ void GameLogic::nextTurn()
     m_direction = Vector2(0, 0);
 }
 
+/** * Handles player input for movement direction.
+ * Updates the direction vector based on key presses.
+ * The player can move up, down, left, or right, but cannot exceed the bounds of -1 to 1 for each axis.
+ */
 void GameLogic::handleInput()
 {
     if (IsKeyPressed(KEY_UP) && m_direction.y > -1)
@@ -141,6 +163,10 @@ void GameLogic::handleInput()
     }
 }
 
+/** Checks for collisions and updates the player's position accordingly.
+ * It handles boundary conditions, tile types (grass, finish, checkpoint), and player movement.
+ * If the player goes out of bounds, it stops their movement and resets the direction.
+ */
 void GameLogic::checkCollisions()
 {
     Player& player = m_players[m_currentPlayer];
