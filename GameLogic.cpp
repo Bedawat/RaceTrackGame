@@ -92,7 +92,7 @@ void GameLogic::reset()
 void GameLogic::update()
 {
     handleInput();
-    if (IsKeyPressed(KEY_ENTER))
+    if (IsKeyPressed(KEY_ENTER)|| IsKeyPressed(KEY_SPACE))
     {
         nextTurn();
     }
@@ -145,19 +145,19 @@ void GameLogic::nextTurn()
  */
 void GameLogic::handleInput()
 {
-    if (IsKeyPressed(KEY_UP) && m_direction.y > -1)
+    if ((IsKeyPressed(KEY_UP) || IsKeyPressed(KEY_W)) && m_direction.y > -1)
     {
         m_direction.y += -1;
     }
-    if (IsKeyPressed(KEY_DOWN) && m_direction.y < 1)
+    if ((IsKeyPressed(KEY_DOWN) || IsKeyPressed(KEY_S)) && m_direction.y < 1)
     {
         m_direction.y += 1;
     }
-    if (IsKeyPressed(KEY_LEFT) && m_direction.x > -1)
+    if ((IsKeyPressed(KEY_LEFT) || IsKeyPressed(KEY_A)) && m_direction.x > -1)
     {
         m_direction.x += -1;
     }
-    if (IsKeyPressed(KEY_RIGHT) && m_direction.x < 1)
+    if ((IsKeyPressed(KEY_RIGHT) || IsKeyPressed(KEY_D)) && m_direction.x < 1)
     {
         m_direction.x += 1;
     }

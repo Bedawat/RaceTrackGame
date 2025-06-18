@@ -343,7 +343,8 @@ void GameEngine::drawGameOver()
         Player winner = game.getPlayers().at(game.getWinner());
         DrawText(text.c_str(), centerX - MeasureText(text.c_str(), 30) / 2, y, 30, winner.getColor());
         y += lineHeight;
-        std::string pathText = "Anzahl der Spielzüge: " + std::to_string(winner.getPathLength());
+        std::string pathText = "Anzahl der Spielzüge: " + std::to_string(winner.getPathLength() - 1);
+        // -1, da Startpunkt nicht als Zug zählt
         DrawText(pathText.c_str(), centerX - MeasureText(pathText.c_str(), 30) / 2, y, 30, winner.getColor());
         y += lineHeight + 10;
     }
