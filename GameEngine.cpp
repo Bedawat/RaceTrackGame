@@ -234,7 +234,7 @@ void GameEngine::drawStartMenu()
             m_settings.playerCount++;
         if (CheckCollisionPointRec(mouse, btnMinusTrack) && m_settings.TrackNumber > 1)
             m_settings.TrackNumber--;
-        if (CheckCollisionPointRec(mouse, btnPlusTrack) && m_settings.TrackNumber < 3)
+        if (CheckCollisionPointRec(mouse, btnPlusTrack) && m_settings.TrackNumber < 2)
             m_settings.TrackNumber++;
         if (CheckCollisionPointRec(mouse, btnTutorial))
         {
